@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./bower_components/bootstrap-css-only/css/bootstrap.min.css" />
+  </head>
+  <body ng-app="myApp">
+    <!-- Top Navigation Bar -->
+    <nav class="navbar navbar-inverse bg-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Spring Boot Example</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container" ng-controller="AppController">
+      <br />
+      <div class="page-header">
+        <h1>Todo <small>List of Todo items</small></h1>
+      </div>
+
+      <form class="form-horizontal" role="form" ng-submit="addTodo(newTodo)">
+        <div class="form-group" ng-repeat="todo in todoList">
+          <div class="checkbox col-xs-9">
+            <label>
+              <input type="checkbox" ng-model="todo.complete" ng-change="updateTodo(todo)"/>
+              <!-- If the checkbox is checked mute the text -->
+              <span class="text-muted" ng-if="todo.complete" >{{todo.message}}</span>
+              <span ng-if="!todo.complete" >{{todo.message}}</span>
+            </label>
+          </div>
+          <div class="col-xs-3">
+            <button class="pull-right btn btn-danger" type="button" title="Delete"
+                    ng-click="deleteTodo(todo)">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </div>
+        </div>
+        <hr />
+        <div class="input-group">
+          <input type="text" class="form-control" ng-model="newTodo.message" placeholder="Enter what you need todo..." />
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit" ng-disabled="!newTodo" title="Add">
+              <span class="glyphicon glyphicon-plus"></span>
+            </button>
+          </span>
+        </div>
+      </form>
+    </div>
+    <script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="./app/app.js"></script>
+    <script type="text/javascript" src="./app/controllers.js"></script>
+    <script type="text/javascript" src="./app/services.js"></script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+
+jar {
+    baseName = 'spring-boot-example'
+    version = '1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations.all {
+    exclude module: 'slf4j-log4j12'
+}
+
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:1.5.2.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-jdbc")
+
+    // In memory DB
+    compile("org.hsqldb:hsqldb:2.3.2")
+
+    // Swagger Documentation
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1'
+    // Note that these dependencies could be written like this as well (as seen above):
+    // compile("io.springfox:springfox-swagger-ui:2.6.1")
+
+    //Test Dependencies
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.5'
+}
