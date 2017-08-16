@@ -3,3 +3,6 @@
 .settings/
 target/
 bower_components/
+*iml
+.idea/
+.gradle/

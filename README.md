@@ -1,3 +1,6 @@
+## Spring Boot Example
+Demo application developed to build knowledge surrounding Spring Boot and it's components
+
 ## Frameworks
 
 ### Front-end
