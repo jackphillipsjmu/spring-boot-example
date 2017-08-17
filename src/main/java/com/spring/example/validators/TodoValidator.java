@@ -39,6 +39,6 @@ public class TodoValidator implements Validator {
         // If invalid then add the error to the Errors object
         // the corresponding exception is org.springframework.web.bind.MethodArgumentNotValidException
         if (!valid)
-            errors.reject("Invalid Todo request please include a message in the request", DEFAULT_TODO_ERROR);
+            errors.reject(DEFAULT_TODO_ERROR + " Please include a message in the body of the Todo request");
     }
 }
