@@ -53,7 +53,7 @@ public class TodoValidationAdvice {
     private MessageSource messageSource;
 
     /**
-     * Method captures MethodArgumentNotValidException error methods from Controller and builds list of
+     * Method captures MethodArgumentNotValidException errors from Controller and builds list of
      * String error messages
      *
      * @ExceptionHandler = Annotation for handling exceptions in specific handler classes and/or handler methods
