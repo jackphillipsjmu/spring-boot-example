@@ -27,9 +27,17 @@ configurations.all {
 
 
 dependencies {
+    // Spring Web dependency
     compile("org.springframework.boot:spring-boot-starter-web:1.5.2.RELEASE")
+
+    // Spring JPA dependency
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    // Spring JDBC dependency
     compile("org.springframework.boot:spring-boot-starter-jdbc")
+
+    // Spring Validation
+    compile("org.springframework.boot:spring-boot-starter-validation")
 
     // In memory DB
     compile("org.hsqldb:hsqldb:2.3.2")
