@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 
 /**
+ * Class represents a Todo Object
+ *
  * @Author Jack Phillips
  *
  * NOTES:
