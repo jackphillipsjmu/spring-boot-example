@@ -4,6 +4,7 @@ import com.spring.example.repository.TodoRepository;
 import com.spring.example.service.TodoService;
 import com.spring.example.model.Todo;
 import com.spring.example.validators.TodoValidator;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +15,13 @@ import java.util.List;
 /**
  * REST Controller to handle requests to the Micro service
  *
- * TODO:
- * - Improve Swagger Documentation and implement static doc generation
+ * - Improve Swagger Documentation
+ *     - Complete! Check out the @ApiOperation examples below
  * - Add request validator so we ensure that data passed into our methods are valid
- *     - Complete, see class {@link TodoValidator} for example
+ *     - Complete! See class {@link TodoValidator} for example
  *
+ * TODO:
+ * - Implement static document generation using Swagger and ASCIIDoctor
  * - Add API versioning
  *
  * @suthor Jack Phillips
@@ -34,13 +37,19 @@ public class TodoController {
     private TodoRepository todoRepo;
 
     /**
-     * Returns all of the Todo objects tored in the in memory database
+     * Returns all of the Todo objects stored in the in memory database
      *
      * @GetMapping = Annotation for mapping HTTP {@code GET} requests onto specific handler
      * methods. This is a composed annotation that acts as a shortcut for @RequestMapping(method = RequestMethod.GET)
+     * @ApiOperation = Describes an operation or typically a HTTP method against a specific path
      *
      * @return List of Todo objects
      */
+    @ApiOperation(
+            value = "Retrieves all stored Todo objects",    // Description of the endpoint
+            response = Todo.class,      // Response class for endpoint these usually are picked up by Swagger automatically
+            responseContainer = "List"  // Declares a container wrapping the response (List, Map, etc.)
+    )
     @GetMapping
     public List<Todo> findAllTodos() {
         return todoService.findAll();
@@ -66,11 +75,16 @@ public class TodoController {
      * @Valid = Marks a property, method parameter or method return type for validation cascading.
      * this annotation binds to the WebDataBinder and in turn the TodoValidator. If invalid it will throw a
      * org.springframework.web.bind.MethodArgumentNotValidException which we can leave as is or capture using
-     * @ControllerAdvice in a seperate class.
+     * @ControllerAdvice in a separate class.
      *
      * @param todo Todo object to add to database
      * @return Todo the saved Todo object
      */
+    @ApiOperation(
+            value = "Add Todo to database",
+            notes = "Endpoint will validate that the Todo object in the request body has a message",
+            response = Todo.class
+    )
     @PostMapping
     public Todo addTodo(@RequestBody @Valid Todo todo) {
         return todoService.saveTodo(todo);
